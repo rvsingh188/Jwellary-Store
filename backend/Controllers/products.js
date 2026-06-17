@@ -1,5 +1,4 @@
-const Products=require('./models/products')
-
+const Product=require('../models/products')
 exports.fetchproducts=async(req,res)=>{
     try{
         const allproducts=await Product.find({});

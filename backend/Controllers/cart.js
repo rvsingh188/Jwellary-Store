@@ -1,5 +1,5 @@
 const Cart=require('../models/cart');
-const Product=require('../models/product');
+const Product=require('../models/products');
 const user = require("../models/user");
 exports.addproduct = async (req, res) => {
   try {
@@ -102,8 +102,8 @@ exports.getcart = async (req, res) => {
     let product_array = [];
     for (const item of user_cart.products) {
       const prod = await Product.findById(item.product);
-      const obj = {_id:prod._id,sku_code: prod.sku_code, name: prod.name, category: prod.category, date: prod.date, bestseller: prod.bestseller, price: prod.price,
-        description: prod.description,count: item.quantity,image: prod.image,};
+      const obj = {_id:prod._id, name: prod.name, category: prod.category, date: prod.date, bestseller: prod.bestseller, price: prod.price,
+        description: prod.description,count: item.quantity,images: prod.images};
       product_array = [...product_array, obj];
     }
 

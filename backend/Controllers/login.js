@@ -7,7 +7,7 @@ exports.signup=async(req,res)=>{
     try{
         const{name,email,password,phone}=req.body;
         console.log(name,email,password,phone);
-        const exist=await user.findOne({email});
+        const exist=await User.findOne({email});
         if(exist){
             return res.status(400).json({
                 success:false,
@@ -18,8 +18,10 @@ exports.signup=async(req,res)=>{
         const newuser=await User.create({name,email,password:hashedpass,phone});
         await Cart.create({user:newuser._id,products:[]});
         const options={expires:new Date(Date.now()+24*60*60*1000),httpOnly:true,
+        
         sameSite:process.env.NODE_ENV==='production'?"None":"Lax",secure:process.env.NODE_ENV==='production'};
         const payload={email:newuser.email,id:newuser._id};
+        
             let token=jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:"1d"});
         return res.cookie("token",token,options).status(200).json({
                 success:true,
