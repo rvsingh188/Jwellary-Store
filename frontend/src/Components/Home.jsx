@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom'
 import { useState,useEffect } from 'react'
-
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Autoplay} from "swiper/modules";
 import { GoHeart, GoHeartFill } from "react-icons/go";
@@ -18,7 +18,12 @@ const Home = (props) => {
   const{products,liked, setliked}=props;
   const bestsellers = products.filter((product) => product.bestseller === true).slice(0, 4);
   const newarrivals = products.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 4);
-
+  const offset =
+  window.innerWidth < 768
+    ? 220
+    : window.innerWidth < 1024
+    ? 260
+    : 320;
   const cards = [
   {
     img:"https://res.cloudinary.com/dfislatvt/image/upload/v1781617866/3b4e8f29-af77-42e3-8034-212955c7c033.png"
@@ -165,19 +170,17 @@ useEffect(() => {
       </div>
 
 
-      <div class="relative w-full flex items-center justify-center  px-2 md:px-4 lg:px-16">
-        <button class="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-gray-400 cursor-pointer text-2xl " onClick={prev} >&lt;</button>
+      <div class="relative w-full flex items-center justify-center  px-2 md:px-4 lg:px-16 my-16">
       <div class=" relative flex justify-center items-center h-112 w-full">
-        {[-1,0,1].map((pos)=>{
+        {[-2,-1,0,1,2].map((pos)=>{
             const card = cards[getindex(start + pos)];
           
-          return <div  className={`absolute w-[75vw] h-112 sm:w-[340px] md:w-80  rounded-lg shadow-[0_0_15px_5px_rgba(0,0,0,0.1)] bg-white transition-all duration-500 ${pos === 0 ? "scale-100 z-20 opacity-100" : "hidden lg:block  scale-85 opacity-40 z-10"}`} style={{transform: `translateX(${pos * 320}px)`}}>
+          return <div  className={`absolute w-[75vw] h-112 sm:w-[260px] md:w-80 lg:w-72 xl:w-80  rounded-lg shadow-[0_0_15px_5px_rgba(0,0,0,0.1)] bg-white transition-all duration-500 ${pos === 0 ? "scale-100 z-20 opacity-100" :pos===1 || pos===-1? "hidden sm:block  scale-80 opacity-60 z-10":"hidden xl:block scale-70 z-5 opacity-20"}`} style={{transform: `translateX(${pos * offset}px)`}}>
             <img src={card.img} alt="model-img" class="w-full h-full object-cover rounded-[0.3rem]"></img>
             
           </div>
         })}
       </div>
-      <button class="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-gray-400 cursor-pointer text-2xl " onClick={next}>&gt;</button>
       </div>
 
 
