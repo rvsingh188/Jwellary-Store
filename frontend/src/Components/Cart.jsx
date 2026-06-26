@@ -153,7 +153,7 @@ const Cart = (props) => {
       <div class='mt-16 p-4 flex flex-col gap-4 border border-[#bebebe] h-max rounded-lg lg:w-[30%]'>
         <div class="flex flex-col gap-4 mb-4">
           <div class="mb-2 flex items-center gap-2 text-2xl font-semibold"><IoPricetag class="text-xl" />Coupon Code</div>
-          <div class="flex gap-4 items-center"><input type="text" placeholder='Enter Coupon Code' class="border p-[0.3rem] pl-1 pr-1 rounded-md hover:outline-0 w-[80%]"></input><button class="cursor-pointer text-white bg-[#a46b2c] hover:bg-[#bf9a33] self-center rounded-lg hover:shadow-2xl w-[20%] h-9 hover:-translate-y-1 transition ease-out duration-400">Apply</button></div>
+          <div class="flex gap-4 items-center"><input type="text" placeholder='Enter Coupon Code' class="border p-[0.3rem] pl-1 pr-1 rounded-[0.3rem] hover:outline-0 w-[80%]"></input><button class="cursor-pointer text-white bg-[#a46b2c] hover:bg-[#bf9a33] self-center rounded-[0.3rem] hover:shadow-2xl w-[20%] h-9 hover:-translate-y-1 transition ease-out duration-400">Apply</button></div>
           <div class="flex gap-4 items-center text-green-700 font-semibold justify-between "><div class="flex items-center gap-1"><GiPartyPopper class="text-[#b00]" />FESTIVE 10%</div><div >-${total / 10}</div></div>
           <button class="flex justify-end -mt-4 -mb-4">Remove</button>
         </div>
@@ -164,7 +164,7 @@ const Cart = (props) => {
         <div class='flex justify-between pb-4 border-b-2 border-dotted font-semibold'><p>Shipping Fee</p><p>$20</p></div>
 
         <div class='flex justify-between font-semibold text-xl text-[#a46b2c]'><p class="text-black">Total</p>${total - (total / 10) + 20}</div>
-        <button class="h-12 w-full cursor-pointer text-white bg-[#a46b2c] hover:bg-[#bf9a33] self-center rounded-lg mt-4 hover:shadow-2xl hover:-translate-y-0.5 transition ease-out duration-200" onClick={() => setshowcheckout(true)} >Proceed To CheckOut</button>
+        <button class="h-12 w-full cursor-pointer text-white bg-[#a46b2c] hover:bg-[#bf9a33] self-center rounded-[0.3rem] mt-4 hover:shadow-2xl hover:-translate-y-0.5 transition ease-out duration-200" onClick={() => setshowcheckout(true)} >Proceed To CheckOut</button>
         <div class="flex items-center justify-center gap-1 "><LuShieldCheck /><span>100% secure payment</span></div>
       </div>
       {showcheckout &&

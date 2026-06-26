@@ -9,15 +9,26 @@ const ProductDetails = (props) => {
   const {products,loggedin,cartproducts,setcartproducts} = props;
   const url = import.meta.env.VITE_APP_URL;
   const { id } = useParams();
+  const[showimage,setshowimage]=useState(false);
   const product = products.filter((item) => item._id === id);
   
   let discount=product[0].price*product[0].discount/100
   discount=Math.round(discount);
   const [selectedimage, setselectedimage] = useState(product[0].images[0].url);
   function getCount(prod) {
-    if (cartproducts.lenght === 0) { return 0; }
+    if (cartproducts.lenght === 0) { return 0;}
     const item = cartproducts.find((p) => p._id === prod._id);
     return item ? item.count : 0;
+  }
+  function addtocart(){
+    if(!loggedin){
+      navigate('/login');
+      return;
+    }
+    setshowimage(true);
+    setTimeout(()=>{
+      setshowimage(false)
+    },2000)
   }
   const changecart = async (product, action) => {
     if(!loggedin){
@@ -66,7 +77,7 @@ const ProductDetails = (props) => {
     }
   }
   return (
-    <div class="pt-24 flex flex-col  p-4 lg:flex-row md:gap-12 sm:pl-8 sm:pr-8  md:items-start md:pl-8 md:pr-8 lg:pl-12 lg:pr-12 bg-[#FFFCF7] pb-100 md:pb-64">
+    <div class=" pt-12 flex flex-col  p-4 lg:flex-row md:gap-12 sm:pl-8 sm:pr-8  md:items-start md:pl-8 md:pr-8 lg:pl-12 lg:pr-12 bg-[#FFFCF7] pb-100 md:pb-64">
       <div class=" lg:max-w-[36rem] ">
         <img src={selectedimage} alt="prod-img" class="w-full xl:w-[36rem]  lg:h-[30rem] shadow-[0_4px_8px_0_rgba(0,0,0,0.2)] rounded-lg transition duration-400 ease hover:scale-[1.03]"></img>
         <div class="grid grid-cols-3 gap-4 mt-8">
@@ -76,7 +87,7 @@ const ProductDetails = (props) => {
           
         </div>
       </div>
-      <div class="mt-8 flex flex-col gap-5 md:mt-0 pl-4 pr-4" >
+      <div class="mt-8 flex flex-col gap-4.5 md:mt-0 pl-4 pr-4" >
         <div class="text-4xl font-semibold">{product[0].name} </div>
         <div className="stars product-details-stars -mt-4 flex items-center">
           {[1, 2, 3, 4, 5].map((i) => (
@@ -109,13 +120,14 @@ const ProductDetails = (props) => {
         </div>
         <hr class="w-full h-0.5 text-gray-300 " />
         <div class="flex gap-4 ">
-
+        
           
           {getCount(product[0]) === 0 ? (
-            <button class="bg-yellow-500 p-2.5 pl-10 pr-10 text-white rounded-[0.3rem] cursor-pointer hover:-translate-y-1 transition ease-out duration-400" onClick={() => { changecart(product[0], "add") }} >ADD TO CART</button>) :
+            <button class="bg-yellow-500 p-2.5 pl-10 pr-10 text-white rounded-[0.3rem] cursor-pointer hover:-translate-y-1 transition ease-out duration-400" onClick={() => { changecart(product[0], "add");addtocart();window.scrollTo(0, 0); }} >ADD TO CART</button>) :
             (<button class="bg-yellow-500 p-2.5 pl-10 pr-10 text-white rounded-[0.3rem] cursor-pointer hover:bg-amber-500 hover:shadow-2xl hover:-translate-y-1 transition ease-out duration-400" onClick={() => navigate('/cart')}>GO TO CART</button>)}
           <button class="p-2.5 pl-12 pr-12 border-2 border-yellow-500 text-yellow-500 rounded-[0.3rem] cursor-pointer hover:border-amber-500 hover:text-amber-500 hover:shadow-2xl hover:-translate-y-1 transition ease-out duration-400" >BUY NOW</button>
         </div>
+        {showimage &&<img src={product[0].images[0].url} class="absolute top-60 right-2 h-14 w-14 rounded-lg animate-move-top"></img>}
       </div>
     </div>
   )

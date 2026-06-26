@@ -46,7 +46,7 @@ const Contact = () => {
         </div>
       </div>
     
-    <form className='flex flex-col gap-4 p-4 md:pt-4  rounded-[0.3rem] w-full lg:w-[40%]  bg-[#faf0e6] '>
+    <form className='flex flex-col gap-4 p-4 md:pt-4  rounded-[0.3rem] w-full lg:w-[40%]  bg-[#faf0e6] mt-4 sm:mt-0'>
       <div class='text-3xl font-semibold text-center '>Send Us A Message</div>
           <div class=' flex flex-col md:flex-row  gap-4 md:gap-8'>
               <div class="flex-1">
@@ -78,7 +78,7 @@ const Contact = () => {
       </div>
       <div class="flex gap-16 flex-col mt-10">
         <div class="text-4xl font-semibold text-center">Frequently Asked Questions</div>
-        <div class="grid grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {qa.map((faq,idx)=>{
           return <div className={`flex gap-2 flex-col p-2 rounded-lg  transition-all ease-in duration-300 `}>
             <div onClick={()=>{setopen(open===idx?null:idx)}} class="flex items-center gap-4 cursor-pointer text-xl hover:text-[#daa06d]"><span class="text-2xl font-semibold text-[#daa06d]">{open===idx?<CiCircleMinus />:<CiCirclePlus/>}</span>{faq.ques}</div>

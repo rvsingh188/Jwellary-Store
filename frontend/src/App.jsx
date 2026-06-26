@@ -13,11 +13,17 @@ import Buynow from './Components/Buynow';
 import ProductDetails from './Components/ProductDetails';
 import { IoCartOutline } from 'react-icons/io5'
 import {  toast } from 'react-toastify';
+import { IoGift } from "react-icons/io5";
+import { IoDiamondSharp } from "react-icons/io5";
+import { IoRibbon } from "react-icons/io5";
+import { ImCross } from "react-icons/im";
 import './App.css'
+import { AnimatePresence, motion } from "framer-motion";
 function App() {
   const [count, setCount] = useState(0)
     const url = import.meta.env.VITE_APP_URL;
     const currentpath=location.pathname;
+    const[popup,setpopup]=useState(false);
    const [products, setproducts] = useState([]);
     const [liked, setliked] = useState(() => {
     const result = localStorage.getItem('jwellery-wishlist');
@@ -89,6 +95,14 @@ function App() {
         setloggedin(false);
       }
     } 
+    useEffect(()=>{
+      const timer=setTimeout(()=>{
+        if(!loggedin){
+        setpopup(true);
+        }
+      },5000);
+      return ()=> clearTimeout(timer);
+    },[])
     useEffect(()=>{checkauth(),fetchcart()},[]);
   useEffect(()=>{fetchproducts().then(data=>setproducts(data.products));},[])
   return (
@@ -106,7 +120,31 @@ function App() {
           <div class="flex gap-1">
             {loggedin ? (<NavLink to='/'><button class="bg-[#a10202] text-white p-1 pl-1 pr-1 sm:p-2 sm:pl-3 sm:pr-3 md:pl-6 md:pr-6 rounded-[0.3rem] hover:bg-[#b00] cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition ease-out duration-400" onClick={logoutfunc}>LOG OUT</button></NavLink>) :
               (<NavLink to='/login'><button class="bg-[#a10202] text-white p-1 pl-1 pr-1 sm:p-2 md:pl-6 md:pr-6 rounded-[0.3rem] hover:bg-[#b00] cursor-pointer hover:shadow-2xl hover:-translate-y-0.5 transition ease-out duration-400" >LOG IN</button></NavLink>)}
-            <NavLink to='/cart' class="relative">{({ isActive }) => (<><IoCartOutline className={`text-3xl cursor-pointer ${isActive ? "text-[#b00]" : ""}`}/><div className="absolute top-2 right-0 bg-[#b00] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartproducts.length}</div></>)}</NavLink></div></div>
+            <NavLink to='/cart' class="relative">{({ isActive }) => (<><IoCartOutline className={`text-3xl cursor-pointer ${isActive ? "text-[#b00]" : ""}`}/><div className="absolute top-2 right-0 bg-[#b00] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cartproducts.length}</div></>)}</NavLink></div>
+          </div>
+
+          <AnimatePresence>
+          {popup && <motion.div class="fixed inset-0 z-[999] w-screen h-screen flex justify-center items-center bg-black/40 backdrop-blur-xs overflow-hidden p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+          <motion.div class="relative w-max h-max flex " initial={{ opacity: 0, scale: 0.85, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}transition={{duration: 0.4, ease: "easeOut", }}>
+            <img src="https://res.cloudinary.com/dfislatvt/image/upload/v1782380459/16db997c-e795-4b11-8434-3d6accaf3cdc.png" alt="popup-image" class="h-140 sm:w-155 md:h-130 md:w-190 lg:h-140 lg:w-200 rounded-lg"></img>
+            <div class="absolute z-13 text-xl right-5 top-3 cursor-pointer" onClick={()=>{setpopup(false)}}><ImCross/></div>
+            <div class="absolute z-12 self-start gap-4 sm:gap-8  px-10 py-8 flex  flex-col w-[100%] sm:w-[55%] md:w-[50%] h-full  sm:bg-[#F9F4EE] items-center ">
+              <div class="text-[#2D2118] text-2xl md:text-3xl lg:text-4xl font-serif font-medium tracking-wide text-[#2D2118] text-center">Welcome To Luxora</div>
+              <div class="text-[#4B3C2E] text-xl text-2xl text-center">Join our community and enjoy exclusive member benifits</div>
+              <div class="text-[#C99A4A] grid  sm:grid-cols-3 gap-6">
+                <div class="flex gap-2 md:text-lg text-xl flex-col text-[#4B3C2E] sm:text-[#C99A4A] items-center text-center"><IoDiamondSharp class="text-2xl sm:text-3xl md:text-5xl "/><div>Exclusive OFfers</div></div>
+                <div  class="flex gap-2 md:text-lg text-xl flex-col text-[#4B3C2E] sm:text-[#C99A4A] items-center text-center "><IoGift class="text-2xl sm:text-3xl md:text-5xl"/><div >Early access to new collection</div></div>
+                <div  class="flex gap-2 md:text-lg text-xl flex-col text-[#4B3C2E] sm:text-[#C99A4A] items-center text-center"><IoRibbon class="text-2xl sm:text-3xl md:text-5xl"/><div >Special Member Rewards</div></div>
+              </div>
+              
+              <button class="h-12 w-30 bg-[#a46b2c] text-white rounded-[0.3rem] cursor-pointer" onClick={()=>{navigate('/login')}}>Join Now</button>
+              <button class=" text-[#4B3C2E] sm:text-[#C99A4A] -mt-4 cursor-pointer" onClick={()=>{setpopup(false)}}>Continue Browsing</button>
+            </div>
+          </motion.div>
+          </motion.div>}
+
+          </AnimatePresence>
+
 
     {currentpath!=="/login" && <div class="flex p-2 md:pl-4 md:pr-4 bg-[#F0E4D3] w-full justify-between flex-wrap-reverse gap-4 sm:gap-8 pb-8 pt-8 absolute bottom-0 z-100 ">
       

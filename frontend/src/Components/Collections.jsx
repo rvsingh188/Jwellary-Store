@@ -126,7 +126,7 @@ const Collections = (props) => {
   
   
   return (
-    <div className="flex gap-8 md:pl-8 md:pr-8 pl-4 pr-4 pt-4 relative pb-100 md:pb-64 bg-[#FFFDF8]">
+    <div className="flex gap-8 md:pl-8 md:pr-8  pt-4 relative pb-100 md:pb-64 bg-[#FFFDF8]">
       {sidebar && (
         <div className="fixed top-0 left-0 w-screen h-screen bg-black/40 z-99" onClick={() => { setsidebar(false) }}></div>
       )}
@@ -201,7 +201,7 @@ const Collections = (props) => {
       <div class="w-px bg-gray-300 mt-16 hidden lg:visible"></div>
 
 
-      <div class="flex-1">
+      <div class="flex-1 px-4 md:px-8">
         <div class="flex justify-between items-center">
           <div class=" text-2xl sm:text-3xl font-semibold mb-8" >Collections {filteredresult().length > 0 ? `(${filteredresult().length} products)` : ""}</div>
           <button className="p-2 pl-8 pr-8 bg-[#8b0000] text-white cursor-pointer rounded-[0.3rem] text-xl filter-button" onClick={() => { setsidebar((prev) => !prev) }}>filters</button>
