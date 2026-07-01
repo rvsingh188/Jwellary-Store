@@ -14,7 +14,7 @@ const Buynow = (props) => {
   const selectedproduct=products.filter((item) => item._id === id);
 
   return (
-    <div className='mt-[4] mx-4 mb-100 md:mb-60 '>
+    <div className='mt-[4] mx-4 mb-140 md:mb-80 '>
       <h2 class="text-3xl font-bold my-4">Checkout</h2>
       <div className='grid lg:grid-cols-[2fr_1fr] gap-4 '>
 

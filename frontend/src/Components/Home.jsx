@@ -18,12 +18,7 @@ const Home = (props) => {
   const{products,liked, setliked}=props;
   const bestsellers = products.filter((product) => product.bestseller === true).slice(0, 4);
   const newarrivals = products.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 4);
-  const offset =
-  window.innerWidth < 768
-    ? 220
-    : window.innerWidth < 1024
-    ? 260
-    : 320;
+  const offset =window.innerWidth < 600? 90  : window.innerWidth < 800  ? 200  : 320;
   const cards = [
   {
     img:"https://res.cloudinary.com/dfislatvt/image/upload/v1781617866/3b4e8f29-af77-42e3-8034-212955c7c033.png"
@@ -157,7 +152,7 @@ useEffect(() => {
         </div>
       </div>
 
-      <div class=" relative w-full h-120">
+      <div class=" relative w-full h-80 sm:h-120">
         <div className=" absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center flex gap-4 flex-col">
           <div class="text-lg md:text-2xl text-[#C99A4A]">Timeless beauty</div>
           <div class="flex gap-2 flex-col">
@@ -175,7 +170,7 @@ useEffect(() => {
         {[-2,-1,0,1,2].map((pos)=>{
             const card = cards[getindex(start + pos)];
           
-          return <div  className={`absolute w-[75vw] h-112 sm:w-[260px] md:w-80 lg:w-72 xl:w-80  rounded-lg shadow-[0_0_15px_5px_rgba(0,0,0,0.1)] bg-white transition-all duration-500 ${pos === 0 ? "scale-100 z-20 opacity-100" :pos===1 || pos===-1? "hidden sm:block  scale-80 opacity-60 z-10":"hidden xl:block scale-70 z-5 opacity-20"}`} style={{transform: `translateX(${pos * offset}px)`}}>
+          return <div  className={`absolute w-[70vw] h-100 sm:h-112 sm:w-[260px] md:w-80 lg:w-72 xl:w-80  rounded-lg shadow-[0_0_15px_5px_rgba(0,0,0,0.1)] bg-white transition-all duration-500 ${pos === 0 ? "scale-100 z-20 opacity-100" :pos===1 || pos===-1? "  scale-80 opacity-60 z-10":"hidden xl:block scale-70 z-5 opacity-20"}`} style={{transform: `translateX(${pos * offset}px)`}}>
             <img src={card.img} alt="model-img" class="w-full h-full object-cover rounded-[0.3rem]"></img>
             
           </div>
@@ -184,7 +179,7 @@ useEffect(() => {
       </div>
 
 
-      <div class="w-full  flex flex-col gap-6 pb-64">
+      <div class="w-full  flex flex-col gap-6 pb-140 md:pb-84">
         <div class="text-2xl font-bold flex items-center self-center gap-4 text-[#A88550] "><hr class="w-8 inline-block" />Best Sellers<hr class="w-8 inline-block" /></div>
         <div className="text-4xl font-bold mb-4 self-center bestseller-heading text-center">Choose From The Bestsellers</div>
         <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-12 ml-4 mr-4 md:ml-16 md:mr-16">

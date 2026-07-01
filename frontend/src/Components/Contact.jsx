@@ -26,7 +26,7 @@ const Contact = () => {
     }
   ]
   return (
-    <div class='flex flex-col gap-12 p-4 md:p-16 pb-100 md:pb-80 lg:pb-60 '>
+    <div class='flex flex-col gap-12 p-4 md:p-16 pb-140 md:pb-80 '>
       <div class="flex flex-col lg:flex-row gap-12">
       <div class="w-full lg:w-[60%] h-[300px] md:h-[490px] rounded-lg flex gap-4 flex-col " >
         <div class="flex-[2]"><iframe title="Store Location" src="https://maps.google.com/maps?q=MG%20Road%20Bangalore&t=&z=15&ie=UTF8&iwloc=&output=embed"width="100%" height="100%" style={{ border: 0 }} loading="lazy" /></div>

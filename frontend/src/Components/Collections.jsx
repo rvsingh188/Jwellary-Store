@@ -126,7 +126,7 @@ const Collections = (props) => {
   
   
   return (
-    <div className="flex gap-8 md:pl-8 md:pr-8  pt-4 relative pb-100 md:pb-64 bg-[#FFFDF8]">
+    <div className="flex gap-8 lg:pl-8 md:pr-8  pt-4 relative pb-130 md:pb-84 bg-[#FFFDF8]">
       {sidebar && (
         <div className="fixed top-0 left-0 w-screen h-screen bg-black/40 z-99" onClick={() => { setsidebar(false) }}></div>
       )}

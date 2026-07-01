@@ -19,8 +19,7 @@ const Cart = (props) => {
   const [showcheckout, setshowcheckout] = useState(false);
   const navigate = useNavigate();
   const [total, settotal] = useState(0);
-  const { cartproducts, setcartproducts, liked, setliked } = props;
-  console.log(cartproducts);
+  const { cartproducts, setcartproducts, liked, setliked,loggedin } = props;
   function heartclick(prod) {
     setliked((prevliked) => {
       const already = prevliked.some((item) => item._id === prod._id);
@@ -98,7 +97,7 @@ const Cart = (props) => {
   }, [cartproducts]);
 
   return (
-    <div class="flex gap-8 pt-8 ml-[3%] mr-[3%] lg:flex-row flex-col pb-100 md:pb-64">
+    <div class="flex gap-8 pt-8 ml-[3%] mr-[3%] lg:flex-row flex-col pb-140 md:pb-84">
       <div class="flex flex-col gap-8 lg:w-[70%]">
         <div>
           <div class="text-2xl flex items-center gap-1 font-semibold " >Your Shopping Cart <hr class="border w-20 inline-block" /></div>
